@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinTrack</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Personal FinTrack</h1>
+            <div class="user-info">
+                Welcome, <strong>{{ session.username }}</strong> | 
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        </header>
+        
+        <!-- Add Transaction Form -->
+        <div class="card">
+            <h3>➕ Add Transaction</h3>
+            <input type="date" id="date" class="input-field" value="{{ now }}">
+            <input type="text" id="description" placeholder="Description" class="input-field">
+            <input type="number" id="amount" placeholder="Amount" class="input-field">
+            <select id="category" class="input-field">
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Bills">Bills</option>
+                <option value="Housing">Housing</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Rent">Rent</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Education">Education</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Personal">Personal</option>
+                <option value="Other">Other</option>
+            </select>
+            <select id="type" class="input-field">
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+            </select>
+            <button onclick="addTransaction()" class="btn">Add</button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats">
+            <div class="card">
+                <h3>Income: ₹<span id="total-income">0</span></h3>
+            </div>
+            <div class="card">
+                <h3>Expenses: ₹<span id="total-expense">0</span></h3>
+            </div>
+            <div class="card">
+                <h3>Net Savings: ₹<span id="net-savings">0</span></h3>
+            </div>
+            <div class="card">
+                <h3>Savings Rate: <span id="savings-rate">0</span>%</h3>
+            </div>
+        </div>
+        <div class="card">
+            <h3>💰 Set/Delete Budget</h3>
+            <select id="budget-category" class="input-field">
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Bills">Bills</option>
+                <option value="Housing">Housing</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Rent">Rent</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Education">Education</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Personal">Personal</option>
+            </select>
+            <input type="number" id="budget-amount" placeholder="Budget Amount" class="input-field">
+            <button onclick="setBudget()" class="btn">Set Budget</button>
+            <button onclick="deleteBudget()" class="btn danger">Delete Budget</button>
+            
+            <div id="budget-status" class="budget-status"></div>
+        </div>
+
+
+        <!-- Charts -->
+        <div class="charts">
+            <div class="card">
+                <h3>Income vs Expenses</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="card">
+                <h3>Expense Breakdown</h3>
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="card">
+            <h3>📜 Transaction History</h3>
+            <table id="transactions">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
